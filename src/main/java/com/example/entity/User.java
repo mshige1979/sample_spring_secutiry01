@@ -31,10 +31,16 @@ public class User implements UserDetails {
 	@Column(name="password")
 	private String password;
 	
+	private Collection<GrantedAuthority> authorityList;
+	
+	public void getAuthorities(Collection<GrantedAuthority> authorityList) {
+		this.authorityList = authorityList;
+	}
+	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.authorityList;
 	}
 
 	@Override
