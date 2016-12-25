@@ -33,7 +33,7 @@ public class User implements UserDetails {
 	
 	private Collection<GrantedAuthority> authorityList;
 	
-	public void getAuthorities(Collection<GrantedAuthority> authorityList) {
+	public void setAuthorities(Collection<GrantedAuthority> authorityList) {
 		this.authorityList = authorityList;
 	}
 	
