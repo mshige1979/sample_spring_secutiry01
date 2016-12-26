@@ -4,7 +4,7 @@
 <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-  こんにちは！
+  こんにちは！ <span th:text="${user.username}"></span>さん。<span th:text="${user.role}"></span>権限を持っています。
   <form action="#" th:action="@{/logout}" method="POST">
     <input type="submit" value="ログアウト" />
   </form>

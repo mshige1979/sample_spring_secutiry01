@@ -10,7 +10,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.example.handler.SampleAuthenticationFailureHandler;
-import com.example.service.UserServiceImpl;
 
 @Configuration
 @EnableWebSecurity
@@ -48,13 +47,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     
     @Configuration
     protected static class AuthenticationConfiguration extends GlobalAuthenticationConfigurerAdapter {
+        
         @Autowired
-        UserServiceImpl userDetailsService;
-
+        private AuthenticationProviderImpl authenticationProvider;
+        
         @Override
         public void init(AuthenticationManagerBuilder auth) throws Exception {
-            // 認証するユーザーを設定する
-            auth.userDetailsService(userDetailsService);
+        	// 認証方法を設定する
+        	auth.authenticationProvider(authenticationProvider);
         }
     }
 	
