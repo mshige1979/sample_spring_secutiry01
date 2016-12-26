@@ -35,11 +35,6 @@ public class UserServiceImpl implements UserDetailsService{
 			throw new UsernameNotFoundException("");
 		}
 		
-		// 権限を設定
-		Collection<GrantedAuthority> authorityList = new ArrayList<>();
-		authorityList.add(new SimpleGrantedAuthority("ROLE_USER"));
-		user.setAuthorities(authorityList);
-		
 		// 返却
 		return user;
 	}

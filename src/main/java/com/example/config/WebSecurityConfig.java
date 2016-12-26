@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configurers.GlobalAuthenticationConfigurerAdapter;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -14,7 +15,7 @@ import com.example.handler.SampleAuthenticationFailureHandler;
 import com.example.service.UserServiceImpl;
 
 @Configuration
-@EnableWebMvcSecurity
+@EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Override
@@ -23,7 +24,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		// 認可の設定
         httpSecurity
         	.authorizeRequests()
-        	.antMatchers("/login").permitAll()	// /loginは認証なしでアクセス可能
+        	.antMatchers("/css/**", "/img/**", "/js/**", "/login").permitAll()	// /loginは認証なしでアクセス可能
+        	.antMatchers("/admin/**").hasRole("ADMIN")	// ADMINユーザーのみアクセス可能
+        	.antMatchers("/user/**").hasRole("USER")	// USERユーザーのみアクセス可能
         	.anyRequest()
         	.authenticated();
         
